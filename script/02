@@ -1,4 +1,7 @@
+crontab -l > mycron
 echo "0 4 * * 1 root apt-get update >> /var/log/update_script.log && \
 apt-get upgrade >> /var/log/update_script.log && \
 apt-get auto remove >> /var/log/update_script.log" \
->> /etc/cron.d/anacron
+>> mycron
+crontab mycron
+rm mycron
