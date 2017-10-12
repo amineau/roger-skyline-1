@@ -1,0 +1,5 @@
+#!/bin/bash
+
+if [[ -d $1 ]]; then
+	ls -Sp $1 | grep -v /;
+fi
