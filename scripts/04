@@ -1,18 +1,25 @@
 #!/bin/bash
 
 echo "#!/bin/bash
+sendmail() {
+	echo $1 | mail -s 'Crontab backup' root;
+	echo $1;
+}
+
 if [ ! -f /var/backups/crontab.bak ]; then
-	echo 'Crontab backup has been corrupted';
+	sendmail 'Crontab backup has been corrupted';
 	cp /etc/crontab /var/backups/crontab.bak;
 elif [ \$(md5sum /var/backups/crontab.bak | cut -d' ' -f1) != \$(md5sum /etc/crontab | cut -d' ' -f1) ]; then
-	echo 'Crontab has been modified';
+	sendmail 'Crontab has been modified';
 	cp /etc/crontab /var/backups/crontab.bak;
+else
+	sendmail 'it ok';
 fi" > /usr/local/bin/04
 
 cp /etc/crontab /var/backups/crontab.bak;
-/bin/sh /usr/local/bin/04
+/bin/bash /usr/local/bin/04
 
-crontab -l > mycron
-echo "0 0 * * * /bin/sh /usr/local/bin/04" >> mycron
+crontab -l > mycron 2> /dev/null
+echo "* * * * * /bin/sh /usr/local/bin/04" >> mycron
 crontab mycron
 rm mycron
