@@ -1,12 +1,12 @@
 #!/bin/bash
 
-echo "apt-get update -y >> /var/log/update_script.log;
-apt-get upgrade -y >> /var/log/update_script.log;
-apt-get autoremove -y >> /var/log/update_script.log" >> /usr/local/bin/02
+echo "apt-get update -y >> /var/log/update_script.log 2> /dev/null;
+apt-get upgrade -y >> /var/log/update_script.log 2> /dev/null;
+apt-get autoremove -y >> /var/log/update_script.log 2> /dev/null" >> /usr/local/bin/02
 
 /bin/sh /usr/local/bin/02
 
-crontab -l > mycron
+crontab -l > mycron 2> /dev/null
 echo "0 4 * * 1 /bin/sh /usr/local/bin/02" >> mycron
 crontab mycron
 rm mycron

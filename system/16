@@ -1,1 +1,1 @@
-/user/sbin/cron
+Service /usr/bin/crontab

@@ -1,5 +1,5 @@
 #!/bin/bash
 
 if [[ -d $1 ]]; then
-	ls -Sp $1 | grep -v /;
+	find $1 -type f -exec du -B1 {} + | sort -n -r;
 fi

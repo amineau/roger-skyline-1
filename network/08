@@ -1,1 +1,3 @@
-Oui, les Ips retounees par le DNS de google sont similaires
+Apres avoir recuperer l'ip du slash16.org avec `nslookup slash16.org`
+Avec l'adresse ip, executer la commande `whois ${ip}`
+L'herbergeur trouve est Amazon Technologies
